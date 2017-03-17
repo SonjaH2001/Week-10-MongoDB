@@ -1,0 +1,19 @@
+<h1>Flowers</h1>
+
+
+<form action="/" method="get">
+    <select name="color_filter">
+    {{#each colors}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+    </select>
+
+    <button type="submit">Choose Color</button>
+</form>
+<ul>
+    {{#each flowers}}
+        <li>
+        <a href="/details/{{this.name}}">{{this.name}} is {{this.color}}</a></li>
+    {{/each}}
+
+</ul>
