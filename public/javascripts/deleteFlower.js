@@ -19,7 +19,7 @@ $(function(){
 
 // Add an input text field, after the color.
 // Add instructions, and event handler for Enter key.
-function addInput(element) {
+function removeFlower(element) {
     var input = '<input id="newcolor" placeholder="New color"/>';
     //add button to select delete function
     element.append(input);

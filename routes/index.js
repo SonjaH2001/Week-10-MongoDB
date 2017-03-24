@@ -67,4 +67,15 @@ router.put('/updateColor', function(req, res, next) {
     })
 });
 
+router.post('/removeFlower', function(req, res, next){
+    req.db.collection('flowers').findOneAndDelete(req.body, function(err){
+        if (err) {
+            return next(err);
+        }
+        return res.redirect('/');
+    });
+});
+
+
+
 module.exports = router;

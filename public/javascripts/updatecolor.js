@@ -21,7 +21,7 @@ function addInput(element) {
     var input = '<input id="newcolor" placeholder="New color"/>';
     element.append(input);
     $('#instructions').text('Press Enter to save, Esc to quit');
-
+// ajax is called from flower_details.hbs
     $('#newcolor').keypress(function (event) {
         if (event.which == 13) {     // Keycode for Enter
             var color = $(this).val();
