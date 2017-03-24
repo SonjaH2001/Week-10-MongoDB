@@ -45,11 +45,17 @@ router.get('/details/:flower', function(req, res, next){
 
 
 router.post('/addFlower', function(req, res, next){
+    req.db.collection('flowers').findOne({'name' : req.body.name}, function(err, doc) {
+        if (doc) {
+            return res.send("already exists");
+        }
+
     req.db.collection('flowers').insertOne(req.body, function(err){
         if (err) {
             return next(err);
         }
         return res.redirect('/');
+    });
     });
 });
 
@@ -67,15 +73,15 @@ router.put('/updateColor', function(req, res, next) {
     })
 });
 
-router.post('/removeFlower', function(req, res, next){
+router.post('/deleteFlower', function(req, res, next){
     req.db.collection('flowers').findOneAndDelete(req.body, function(err){
         if (err) {
             return next(err);
+            console.log(findOneAndDelete);
         }
         return res.redirect('/');
     });
 });
-
 
 
 module.exports = router;
