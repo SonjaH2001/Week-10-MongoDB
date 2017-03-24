@@ -17,11 +17,17 @@
     {{/each}}
 
 </ul>
-
+<hr>
 <h2>Add New Flower</h2>
 <form action="/addFlower" method="post">
-    Name <input type="text" name="name" placeholder="Name"><br>
-    Color <input type="text" name="color" placeholder="Color"><br>
-    Wikipedia Page <input type="text" name="wiki" placeholder="Wikipedia Page"><br>
+    Name <input type="text" name="name" placeholder="Name"><br><br>
+    Color <input type="text" name="color" placeholder="Color"><br><br>
+    Wikipedia Page <input type="text" name="wiki" placeholder="Wikipedia Page"><br><br>
     <button type="submit">Save</button>
+</form>
+
+<hr><br>
+<form action="/deleteFlower" method="post">
+    Name <input type="text" name="name" placeholder="Name"><br><br>
+    <button type="submit">Delete</button>
 </form>
