@@ -30,7 +30,6 @@ router.get('/', function(req, res, next) {
     });
 });
 
-
 router.get('/details/:flower', function(req, res, next){
     req.db.collection('flowers').findOne({'name' : req.params.flower}, function(err, doc) {
         if (err) {
@@ -42,14 +41,22 @@ router.get('/details/:flower', function(req, res, next){
         return res.render('flower_details', { 'flower' : doc });
     });
 });
-
-
+//post-changed findOne params vs. get params.
+//added the findOne to search agains database before adding.
+//send a message if exists
+//add to db if doesn't
+//add err handling.
 router.post('/addFlower', function(req, res, next){
     req.db.collection('flowers').findOne({'name' : req.body.name}, function(err, doc) {
+        if (err) {
+            return next(err);  // 500 error
+        }
+        if (!doc) {
+            return next();  // Creates a 404 error
+        }
         if (doc) {
             return res.send("already exists");
         }
-
     req.db.collection('flowers').insertOne(req.body, function(err){
         if (err) {
             return next(err);
@@ -58,8 +65,7 @@ router.post('/addFlower', function(req, res, next){
     });
     });
 });
-
-
+//add error handler
 router.put('/updateColor', function(req, res, next) {
 
     var filter = { 'name' : req.body.name };
@@ -72,12 +78,20 @@ router.put('/updateColor', function(req, res, next) {
         return res.send({'color' : req.body.color})
     })
 });
-
+//don't forget to restart server.
+//added router and function to delete item from db.
+//gets the text from user input
+//add error handler
 router.post('/deleteFlower', function(req, res, next){
+    if (err) {
+        return next(err);  // 500 error
+    }
+    if (!doc) {
+        return next();  // Creates a 404 error
+    }
     req.db.collection('flowers').findOneAndDelete(req.body, function(err){
         if (err) {
             return next(err);
-            console.log(findOneAndDelete);
         }
         return res.redirect('/');
     });
