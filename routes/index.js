@@ -51,18 +51,19 @@ router.post('/addFlower', function(req, res, next){
         if (err) {
             return next(err);  // 500 error
         }
-        if (!doc) {
-            return next();  // Creates a 404 error
-        }
+        // unneeded
+        // if (!doc) {
+        //     return next();  // Creates a 404 error
+        // }
         if (doc) {
             return res.send("already exists");
         }
-    req.db.collection('flowers').insertOne(req.body, function(err){
-        if (err) {
-            return next(err);
-        }
-        return res.redirect('/');
-    });
+        req.db.collection('flowers').insertOne(req.body, function(err){
+            if (err) {
+                return next(err);
+            }
+            return res.redirect('/');
+        });
     });
 });
 //add error handler
@@ -83,12 +84,13 @@ router.put('/updateColor', function(req, res, next) {
 //gets the text from user input
 //add error handler
 router.post('/deleteFlower', function(req, res, next){
-    if (err) {
-        return next(err);  // 500 error
-    }
-    if (!doc) {
-        return next();  // Creates a 404 error
-    }
+    // err handling won't work becasue not err argument (it's in the next callback)
+    // if (err) {
+    //     return next(err);  // 500 error
+    // }
+    // if (!doc) {
+    //     return next();  // Creates a 404 error
+    // }
     req.db.collection('flowers').findOneAndDelete(req.body, function(err){
         if (err) {
             return next(err);
